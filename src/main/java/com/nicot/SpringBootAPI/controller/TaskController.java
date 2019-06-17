@@ -3,6 +3,7 @@ package com.nicot.SpringBootAPI.controller;
 import com.nicot.SpringBootAPI.model.Task;
 import com.nicot.SpringBootAPI.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,7 +29,7 @@ public class TaskController {
 
         boolean added = taskService.add(task);
         if (added) {
-            return ResponseEntity.ok().build();
+            return ResponseEntity.status(HttpStatus.CREATED).build();
         }
 
         return ResponseEntity.badRequest().build();
