@@ -2,8 +2,13 @@ package com.nicot.SpringBootAPI.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Task {
 
+    @Id
     private Long id;
     private String description;
     private Boolean done;

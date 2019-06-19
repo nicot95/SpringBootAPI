@@ -1,8 +1,10 @@
 package com.nicot.SpringBootAPI.config;
 
 
+import com.nicot.SpringBootAPI.repository.TaskJDBCRepository;
+import com.nicot.SpringBootAPI.service.TaskJPAService;
 import com.nicot.SpringBootAPI.service.TaskService;
-import com.nicot.SpringBootAPI.service.TaskServiceImpl;
+import com.nicot.SpringBootAPI.service.TaskJDBCService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -10,7 +12,17 @@ import org.springframework.context.annotation.Configuration;
 public class Config {
 
     @Bean
-    public TaskService getTaskService() {
-        return new TaskServiceImpl();
+    public TaskJDBCService getJDBCTaskService() {
+        return new TaskJDBCService();
+    }
+
+    @Bean
+    public TaskJPAService getJPATaskService() {
+        return new TaskJPAService();
+    }
+
+    @Bean
+    public TaskJDBCRepository getTaskJDBCRepository() {
+        return new TaskJDBCRepository();
     }
 }

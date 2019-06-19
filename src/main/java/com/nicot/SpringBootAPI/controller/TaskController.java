@@ -1,7 +1,8 @@
 package com.nicot.SpringBootAPI.controller;
 
 import com.nicot.SpringBootAPI.model.Task;
-import com.nicot.SpringBootAPI.service.TaskService;
+import com.nicot.SpringBootAPI.repository.TaskJDBCRepository;
+import com.nicot.SpringBootAPI.service.TaskJPAService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +14,10 @@ import java.util.List;
 public class TaskController {
 
     @Autowired
-    private TaskService taskService;
+    private TaskJPAService taskService;
+
+    @Autowired
+    private TaskJDBCRepository taskJDBCRepository;
 
     @RequestMapping(path = "/todos", method = RequestMethod.GET)
     public ResponseEntity<List<Task>> allTasks() {

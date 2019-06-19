@@ -1,4 +1,4 @@
-package com.nicot.SpringBootAPI.service;
+package com.nicot.SpringBootAPI.repository;
 
 import com.nicot.SpringBootAPI.model.Task;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TaskServiceImpl implements TaskService {
+public class TaskJDBCRepository {
 
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
@@ -19,7 +19,6 @@ public class TaskServiceImpl implements TaskService {
     private static final String INSERT_TASK_SQL = "INSERT INTO tasks(id, description, done) VALUES (:id, :description, :done)";
     private static final String UPDATE_TASK_SQL = "UPDATE tasks SET id = :id, description = :description, done = :done WHERE id = :taskId";
     private static final String DELETE_TASK_SQL = "DELETE FROM tasks WHERE id = :id";
-
 
     public List<Task> getAll() {
         List<Task> taskList = new ArrayList<>();
@@ -30,7 +29,7 @@ public class TaskServiceImpl implements TaskService {
                             rs.getString("Description"),
                             rs.getBoolean("Done"));
                     taskList.add(task);
-        });
+                });
         return taskList;
     }
 
@@ -42,7 +41,7 @@ public class TaskServiceImpl implements TaskService {
 
         int inserted;
         try {
-             inserted = jdbcTemplate.update(INSERT_TASK_SQL, paramMap);
+            inserted = jdbcTemplate.update(INSERT_TASK_SQL, paramMap);
         } catch (DataAccessException ex) {
             inserted = 0;
         }
